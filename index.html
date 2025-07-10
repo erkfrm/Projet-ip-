@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulation de récupération d'adresse IP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1f1f1f;
+      color: #ffffff;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #00ffcc;
+    }
+    .ip-box {
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 30px auto;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 0 15px #00ffcc55;
+    }
+    .ip-address {
+      font-size: 1.5em;
+      color: #00ffcc;
+    }
+    .info {
+      font-size: 0.9em;
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simulation de récupération d’adresse IP</h1>
+  <p class="info">Cette page vous montre votre adresse IP dans un cadre pédagogique.</p>
+
+  <div class="ip-box">
+    <p class="ip-address" id="ip">Chargement de votre IP...</p>
+  </div>
+
+  <p class="info">Aucune donnée n’est enregistrée. Ce site est une démo pour projet scolaire.</p>
+
+  <script>
+    fetch("https://api.ipify.org?format=json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("ip").textContent = "Votre adresse IP est : " + data.ip;
+      })
+      .catch(error => {
+        document.getElementById("ip").textContent = "Impossible de récupérer l'IP.";
+        console.error("Erreur:", error);
+      });
+  </script>
+</body>
+</html>
